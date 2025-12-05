@@ -7,7 +7,7 @@ export default function syntaxAnalyzer(tokens) {
         "KEYWORD",
         "IDENTIFIER",
         "OPERATOR",
-        ["INT_LITERAL", "FLOAT_LITERAL", "CHAR_LITERAL", "STRING_LITERAL", "BOOLEAN_LITERAL", "NULL_LITERAL"],
+        ["INT_LITERAL", "FLOAT_LITERAL", "CHAR_LITERAL", "STRING_LITERAL", "BOOLEAN_LITERAL", "NULL_LITERAL", "IDENTIFIER"],
         "SEPARATOR"
     ];
 

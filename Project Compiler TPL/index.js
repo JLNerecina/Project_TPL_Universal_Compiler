@@ -42,7 +42,7 @@ fileInput.addEventListener('change', () => {
 //Buttons
 import lexicalAnalyzer, { lexicalValidCheck } from "./lexical.js";
 import syntaxAnalyzer, { syntaxValidCheck } from "./syntax.js";
-import semanticAnalyzer from "./semantic.js";
+import semanticAnalyzer, { semanticValidCheck } from "./semantic.js";
 
 let tokens = [];
 lexicalBtn.addEventListener('click', () => performLexical());
@@ -67,14 +67,14 @@ function performSyntax() {
     enablePhase(semanticBtn, syntaxBtn, 2);
   }
   resultArea.textContent = syntaxAnalyzer(tokens);
-  
 }
 
 semanticBtn.addEventListener('click', () => performSemantic());
 function performSemantic() {
-  // Placeholder for semantic analysis
-  resultArea.textContent += '\n\nSemantic Analysis: (Not Implemented)';
-  enablePhase(null, semanticBtn,  3);
+  if(semanticValidCheck() == true){
+    enablePhase(null, semanticBtn,  3);
+  }
+  resultArea.textContent = semanticAnalyzer(tokens);
 }
 
 clearBtn.addEventListener('click', () => resetAll(true));
