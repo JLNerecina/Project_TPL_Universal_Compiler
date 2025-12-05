@@ -41,8 +41,8 @@ fileInput.addEventListener('change', () => {
 
 //Buttons
 import lexicalAnalyzer from "./lexical.js";
-import syntaxAnalyzer from "./syntax";
-// import semanticAnalyzer from "./semantic";
+import syntaxAnalyzer from "./syntax.js";
+import semanticAnalyzer from "./semantic.js";
 
 let tokens = [];
 lexicalBtn.addEventListener('click', () => performLexical());

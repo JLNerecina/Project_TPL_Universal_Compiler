@@ -6,7 +6,6 @@ export default function lexicalAnalyzer(sourceCode) {
     // Cannot start with a digit
     const IDENTIFIER   = "\\b[A-Za-z_$][A-Za-z0-9_$]*\\b";
 
-    // 
     const INT_LITERAL  = "0|[1-9][0-9]*";
 
     const FLOAT_LITERAL= "[0-9]+\\.[0-9]*";
@@ -21,21 +20,20 @@ export default function lexicalAnalyzer(sourceCode) {
 
     const OPERATOR = "=";
 
-    const SEPARATOR = "[;,]";
-
-    const LINE_COMMENT = "//[^\\n]*";
-
-    const BLOCK_COMMENT = "/\\*[^*]*\\*+([^/*][^*]*\\*+)*/";
-    
     const WHITESPACE = "\\s+";
 
+    const SEPARATOR = "[;,]";
+
+    // const LINE_COMMENT = "//[^\\n]*";
+
+    // const BLOCK_COMMENT = "/\\*[^*]*\\*+([^/*][^*]*\\*+)*/";
+    
     const tokens = [];
     let current = 0;
 
     const tokenMatchers = [
-        { type: 'WHITESPACE', regex: WHITESPACE, skip: true },
-        { type: 'BLOCK_COMMENT', regex: BLOCK_COMMENT, tokenType: 'COMMENT' },
-        { type: 'LINE_COMMENT', regex: LINE_COMMENT, tokenType: 'COMMENT' },
+        { type: 'WHITESPACE', regex: WHITESPACE, skip: true},
+        { type: 'SEPARATOR', regex: SEPARATOR },
         { type: 'KEYWORD', regex: KEYWORD },
         { type: 'STRING_LITERAL', regex: STRING_LITERAL },
         { type: 'CHAR_LITERAL', regex: CHAR_LITERAL },
@@ -44,8 +42,7 @@ export default function lexicalAnalyzer(sourceCode) {
         { type: 'BOOLEAN_LITERAL', regex: BOOLEAN_LITERAL },
         { type: 'NULL_LITERAL', regex: NULL_LITERAL },
         { type: 'IDENTIFIER', regex: IDENTIFIER },
-        { type: 'OPERATOR', regex: OPERATOR },
-        { type: 'SEPARATOR', regex: SEPARATOR }
+        { type: 'OPERATOR', regex: OPERATOR }
     ];
 
     while (current < sourceCode.length) {
@@ -55,7 +52,7 @@ export default function lexicalAnalyzer(sourceCode) {
             const match = sourceCode.substring(current).match(regex);
             if (match) {
                 if (!matcher.skip) {
-                    tokens.push({ type: matcher.tokenType || matcher.type, value: match[0] });
+                    tokens.push({ type: matcher.type, value: match[0] });
                 }
                 current += match[0].length;
                 matched = true;
